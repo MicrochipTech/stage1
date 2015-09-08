@@ -1,0 +1,24 @@
+# This file is to allow the Microchip MDB to program
+# the PIC32MZ [DA] with Linux primary bootloader and U-Boot
+#
+# Prerequisites:
+#   1) MPLABX is installed
+#   4) Modify the path argument in the "Program" command below for your environment
+#   3) RealICE is connected and board powered up as normal
+#
+# Documentation:
+#  “MPLAB® Assembler, Linker and Utilities for PIC32 MCUs User’s Guide" DS51833A
+#  /opt/microchip/mplabx/docs/MDBUserGuide.pdf
+#
+# Usage:
+#   mdb.sh ./boot_flash.cfg
+#
+Device PIC32MZ2064DAB288
+Hwtool RealICE -p
+
+Set AutoSelectMemRanges true
+Set programoptions.eraseb4program true
+
+Program "~/tmp/stage1/stage1.X/dist/pic32mzda/production/stage1.X.production.unified.hex"
+
+quit
