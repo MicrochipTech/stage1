@@ -2,7 +2,7 @@
 
 set -e
 
-USAGE="USAGE: ./build_pgm <path to u-boot>"
+USAGE="USAGE: $0 <path to u-boot>"
 
 if [ $# -ne 1 ] ; then
     echo $USAGE
