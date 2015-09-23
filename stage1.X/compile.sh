@@ -9,9 +9,21 @@ if [ $# -ne 1 ] ; then
     exit 1;
 fi
 
-mplab_path=$(dirname $(readlink -n /usr/bin/mplab_ide))
+
+die()
+{
+    echo
+    echo "ERROR: $@"
+    echo
+    exit 1
+}
+
+if [ ! -h /usr/bin/mplab_ide ]; then
+    die "MPLABX IDE not found.  Please install."
+fi
 
 dir=$(dirname $0)
+mplab_path=$(dirname $(readlink -n /usr/bin/mplab_ide))
 
 cd $dir/
 mkdir -p $dir/../uboot/
