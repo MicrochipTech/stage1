@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -e
-
 USAGE="USAGE: $0 <path to u-boot>"
 
 if [ $# -ne 1 ] ; then
@@ -41,6 +39,8 @@ mplab_path=$(dirname $(readlink -n /usr/bin/mplab_ide))
 if [ ! -e "$mplab_path/prjMakefilesGenerator.sh" ]; then
     die "MPLABX install missing prjMakefilesGenerator.sh."
 fi
+
+set -e
 
 cd $dir/
 mkdir -p $dir/../uboot/

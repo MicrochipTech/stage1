@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -e
-
 die()
 {
     echo
@@ -30,6 +28,8 @@ mplab_path=$(dirname $(readlink -n /usr/bin/mplab_ide))
 if [ ! -e "$mplab_path/mdb.sh" ]; then
     die "MPLABX install missing mdb.sh."
 fi
+
+set -e
 
 sed "s,^Program.*$,Program \"$dir/dist/pic32mzda/production/stage1.X.production.unified.hex\"," $dir/boot_flash.cfg.in > $dir/boot_flash.cfg
 
