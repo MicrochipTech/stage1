@@ -33,7 +33,8 @@ set -e
 
 sed "s,^Program.*$,Program \"$dir/dist/pic32mzda/production/stage1.X.production.unified.hex\"," $dir/boot_flash.cfg.in > $dir/boot_flash.cfg
 
-$mplab_path/mdb.sh $dir/boot_flash.cfg
+# mdb.sh may ask to accept unexpected device id, just answer yes automatically
+yes y | $mplab_path/mdb.sh $dir/boot_flash.cfg
 
 exit $?
 
