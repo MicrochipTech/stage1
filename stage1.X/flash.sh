@@ -44,7 +44,22 @@ fi
 
 set -e
 
-sed "s,^Program.*$,Program \"$dir/dist/pic32mzda/production/stage1.X.production.unified.hex\"," $dir/boot_flash.cfg.in > $dir/boot_flash.cfg
+sed "s,^Program.*$,Program \"$dir/dist/pic32mzda/production/stage1.X.production.unified.hex\"," $dir/boot_flash.cfg.in > $dir/boot_flash.cfg.in.1
+
+if [ ! -z "$1" ]; then
+    case "$1" in
+        RealICE);;
+        sk);;
+        *) rm $dir/boot_flash.cfg.in.1
+           die "Illegal HWTOOL: valid tools are \"RealICE\" or \"sk\""
+           ;;
+    esac
+    sed "s,^Hwtool.*$,Hwtool \"$1\" -p," $dir/boot_flash.cfg.in.1 > $dir/boot_flash.cfg
+else
+    cat $dir/boot_flash.cfg.in.1 > $dir/boot_flash.cfg
+fi
+
+rm $dir/boot_flash.cfg.in.1
 
 # mdb.sh may ask to accept unexpected device id, just answer yes automatically
 yes y | $mplab_path/mdb.sh $dir/boot_flash.cfg
